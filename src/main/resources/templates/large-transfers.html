@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Large Transfers</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <h2>Large Transfers (Above Minimum Amount)</h2>
+        
+        <form method="get" action="/large-transfers" style="margin-bottom: 20px; display: flex; gap: 10px;">
+            <input type="number" step="0.01" name="min" th:value="${minAmount}" placeholder="Enter minimum amount..." style="max-width: 250px;">
+            <button type="submit">Filter</button>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Description</th>
+                    <th>Date / Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="tx : ${transactions}">
+                    <td th:text="${tx.id}">1</td>
+                    <td th:text="${tx.fromAccount}">100001</td>
+                    <td th:text="${tx.toAccount}">100002</td>
+                    <td th:text="${tx.amount}">5000.00</td>
+                    <td>
+                        <span th:class="${tx.status.name() == 'SUCCESS'} ? 'badge-success' : 'badge-failed'" th:text="${tx.status}">SUCCESS</span>
+                    </td>
+                    <td th:text="${tx.description}">Completed</td>
+                    <td th:text="${tx.createdAt}">2026-11-11</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="/" style="text-decoration: none; color: #3498db;">&larr; Back to Dashboard</a>
+    </div>
+</body>
+</html>
