@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bank Transfer System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header>
+        <h1>Bank Transfer System</h1>
+    </header>
+    <main>
+        <!-- Transfer Form -->
+            <div class="form-container" style="flex: 1;">
+                <h3>Money Transfer</h3>
+                <form th:action="@{/transfer}" th:object="${transferRequest}" method="post">
+                    <div class="form-group">
+                        <label>From Account Number:</label>
+                        <input type="text" th:field="*{fromAccount}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>To Account Number:</label>
+                        <input type="text" th:field="*{toAccount}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Amount (LKR):</label>
+                        <input type="number" step="0.01" th:field="*{amount}" required>
+                    </div>
+                    <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
+                        <input type="checkbox" th:field="*{simulateFailure}" id="simulateFailure">
+                        <label for="simulateFailure" style="margin-bottom: 0;">Simulate a system failure</label>
+                    </div>
+                    <button type="submit">Transfer Money</button>
+                </form>
+            </div>

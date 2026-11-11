@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Deposit Money</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container" style="max-width: 600px;">
+        <h2>Deposit Money</h2>
+        <div th:if="${success}" class="alert-success" th:text="${success}"></div>
+        <div th:if="${error}" class="alert-error" th:text="${error}"></div>
+
+        <form th:action="@{/deposit}" method="post" class="form-container">
+            <div class="form-group">
+                <label>Account Number:</label>
+                <input type="text" name="accountNumber" required>
+            </div>
+            <div class="form-group">
+                <label>Amount (LKR):</label>
+                <input type="number" step="0.01" name="amount" required>
+            </div>
+            <button type="submit">Deposit</button>
+        </form>
+        <a href="/" style="text-decoration: none; color: #3498db;">&larr; Back to Dashboard</a>
+    </div>
+</body>
+</html>
